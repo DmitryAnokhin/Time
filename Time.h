@@ -3,9 +3,15 @@
 */
 
 /*
+  Apr 10 2015 - append support Cyrillic UTF-8 by Dmitry Anokhin
+*/
+
+/*
   July 3 2011 - fixed elapsedSecsThisWeek macro (thanks Vincent Valdy for this)
               - fixed  daysToTime_t macro (thanks maniacbug)
 */     
+
+//#define LANGUAGE_CYRILLIC_UTF8 // Append Russian language in DateStrings.cpp
 
 #ifndef _Time_h
 #ifdef __cplusplus
@@ -123,7 +129,12 @@ void    setTime(int hr,int min,int sec,int day, int month, int yr);
 void    adjustTime(long adjustment);
 
 /* date strings */ 
-#define dt_MAX_STRING_LEN 9 // length of longest date string (excluding terminating null)
+#if defined(LANGUAGE_CYRILLIC_UTF8)
+#define dt_MAX_STRING_LEN 22 // length of longest Russian date string (excluding terminating null)
+#else
+#define dt_MAX_STRING_LEN 9 // length of longest English date string (excluding terminating null)
+#endif
+
 char* monthStr(uint8_t month);
 char* dayStr(uint8_t day);
 char* monthShortStr(uint8_t month);
